@@ -1,0 +1,170 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --site-bg-color: #ffffff;
+  --site-text-color: #000000;
+  --site-heading-color: #0ead38;
+  --site-outline-color: #007bff;
+  --site-hover-color: #cccccc;
+  --site-hoverText-color: #007bff;
+  --site-highlighted-color: #b3b3b3;
+
+  --nav-bg-color: #ffffff;
+  --nav-text-color: #007bff;
+  --nav-hover-color: #cccccc;
+  --nav-hoverText-color: #007bff;
+  --nav-highlighted-color: #b3b3b3;
+  --nav-optionMenuBg-color: #f0f0f0;
+  
+  --cs-done-color: #d4edda;
+  --cs-processing-color: #fff3cd;
+  --cs-error-color: #f8d7da;
+  --cs-pending-color: #e2e3e5;
+}
+
+[data-theme='dark'] {
+  --site-bg-color: #333333;
+  --site-text-color: #ffffff;
+  --site-heading-color: #ffffff;
+  --site-outline-color: #ffffff;
+  --site-hover-color: #444444;
+  --site-hoverText-color: #dddddd;
+  --site-highlighted-color: #000000;
+
+  --nav-bg-color: #222222;
+  --nav-text-color: #ffffff;
+  --nav-hover-color: #444444;
+  --nav-hoverText-color: #dddddd;
+  --nav-highlighted-color: #000000;
+  --nav-optionMenuBg-color: #333333;
+
+  --cs-done-color: #51CB20; /* lime green */
+  --cs-processing-color: #81C3D7; /* Sky blue */
+  --cs-error-color: #FF1D15; /* red */
+  --cs-pending-color: #829191; /* Battleship gray */
+}
+
+[data-theme='blue'] {
+  --site-bg-color: #007bff;
+  --site-text-color: #ffffff;
+  --site-heading-color: #ffffff;
+  --site-outline-color: #ffffff;
+  --site-hover-color: #66a3ff;
+  --site-hoverText-color: #dddddd;
+  --site-highlighted-color: #4d94ff;
+
+  --nav-bg-color: #0056b3;
+  --nav-text-color: #ffffff;
+  --nav-hover-color: #66a3ff;
+  --nav-hoverText-color: #dddddd;
+  --nav-highlighted-color: #4d94ff;
+  --nav-optionMenuBg-color: #004999;
+
+  --cs-done-color: #d4edda;
+  --cs-processing-color: #fff3cd;
+  --cs-error-color: #f8d7da;
+  --cs-pending-color: #e2e3e5;
+}
+
+/* Apply the custom properties */
+body {
+  background-color: var(--site-bg-color);
+  color: var(--site-text-color);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+p {
+  color: var(--site-text-color);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--site-heading-color);
+}
+
+/* SideNav Styling */
+.sidenav-container {
+  @apply relative flex h-full flex-col px-3 py-4 md:px-2;
+  background-color: var(--nav-optionMenuBg-color);
+  /* color: var(--nav-text-color); */
+}
+
+.sidenav-profile-btn {
+  @apply mb-2 flex h-20 items-end justify-start rounded-md p-4 md:h-40;
+  background-color: var(--nav-bg-color);
+  color: var(--nav-text-color);
+}
+
+.sidenav-btn {
+  @apply flex h-[48px] grow items-center justify-center gap-2 rounded-md bg-gray-50 p-3 text-sm font-medium md:flex-none md:justify-start md:p-2 md:px-3;
+  background-color: var(--nav-bg-color);
+  color: var(--nav-text-color);
+}
+
+.sidenav-btn:hover{
+  @apply flex h-[48px] grow items-center justify-center gap-2 rounded-md bg-gray-50 p-3 text-sm font-medium md:flex-none md:justify-start md:p-2 md:px-3;
+  background-color: var(--nav-hover-color);
+  color: var(--nav-hoverText-color);
+}
+
+.sidenav-btn.highlighted {
+  background-color: var(--nav-highlighted-color);
+  color: var(--site-highlighted-color);
+}
+
+/* Dropdown Menu Styling */
+.sidenav-dropdown {
+  @apply absolute top-20 right-0 mt-2 w-48 shadow-lg rounded-md p-4;
+  background-color: var(--nav-optionMenuBg-color);
+  border: 1px solid var(--site-outline-color);
+}
+
+.sidenav-dropdown button {
+  @apply flex h-[48px] w-full items-center justify-center gap-2 rounded-md p-3 text-sm font-medium;
+  background-color: var(--nav-bg-color);
+  color: var(--nav-text-color);
+}
+
+.sidenav-dropdown button:hover{
+  @apply flex h-[48px] w-full items-center justify-center gap-2 rounded-md p-3 text-sm font-medium;
+  background-color: var(--nav-hover-color);
+  color: var(--nav-hoverText-color);
+}
+
+
+.colorSchemer-mainContainer {
+  background-color: var(--nav-optionMenuBg-color);
+}
+
+.colorSchemer-subContainer {
+  background-color: var(--site-bg-color);
+}
+
+.colorSchemer {
+  background-color: var(--nav-bg-color);
+  color: var(--site-text-color);
+}
+
+.colorSchemer:hover{
+  background-color: var(--nav-hover-color);
+  color: var(--nav-hoverText-color);
+}
+
+.colorSchemer.highlighted {
+  background-color: var(--nav-highlighted-color);
+  color: var(--site-highlighted-color);
+}
+
+
+/* Hide content until the correct theme is applied */
+#theme-preload {
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--site-bg-color);
+  z-index: 9999;
+}

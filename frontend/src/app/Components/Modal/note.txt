@@ -1,0 +1,21 @@
+openModal usage:
+1. when using updating content then you need to make an own component with api calls within that component and call that component with given data
+2. when using a not updating content you can just use anything you want
+
+examples:
+for point 1(Updating content): 
+1. Component SerieModalContent call and passing the series and type var)
+openModal(<SerieModalContent selectedSeries={series} type={type!} />, ModalTypes.SMALLBOX);
+
+
+for point 2(Static content):
+1. using html code within the openModal
+  const handleOpenModal = () => {
+    openModal(() => (
+      <div>
+        <h2 style={{ color: 'green' }}>Logout Content</h2>
+        <p>This is the content of the modal for logging out.</p>
+        <a href="/api/auth/logout"><button type='button' onClick={logoutClickEvent} className="bg-BTDanger hover:bg-BTDanger-dark px-4 py-2 rounded-md mt-4">Sign-Out</button></a>
+      </div>
+    ), ModalTypes.SMALLBOX); // Call the openModal function from the context
+  };
