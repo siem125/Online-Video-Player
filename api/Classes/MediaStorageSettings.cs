@@ -1,4 +1,4 @@
 public class MediaStorageSettings
 {
-    public string StoragePath { get; set; } = string.Empty;
+    public string? StoragePath { get; set; }
 }

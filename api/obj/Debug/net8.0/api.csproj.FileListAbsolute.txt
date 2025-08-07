@@ -35,3 +35,37 @@
 /home/siem125/Projects/nextjs-video-player/api/bin/Debug/net8.0/mediaStorageSettings.json
 /home/siem125/Projects/nextjs-video-player/api/bin/Debug/net8.0/mediaStorageSettings.linux.json
 /home/siem125/Projects/nextjs-video-player/api/bin/Debug/net8.0/mediaStorageSettings.windows.json
+E:\7. Tools\Github\Online-Video-Player\api\bin\Debug\net8.0\appsettings.Development.json
+E:\7. Tools\Github\Online-Video-Player\api\bin\Debug\net8.0\appsettings.json
+E:\7. Tools\Github\Online-Video-Player\api\bin\Debug\net8.0\api.staticwebassets.endpoints.json
+E:\7. Tools\Github\Online-Video-Player\api\bin\Debug\net8.0\mediaStorageSettings.linux.json
+E:\7. Tools\Github\Online-Video-Player\api\bin\Debug\net8.0\mediaStorageSettings.windows.json
+E:\7. Tools\Github\Online-Video-Player\api\bin\Debug\net8.0\api.exe
+E:\7. Tools\Github\Online-Video-Player\api\bin\Debug\net8.0\api.deps.json
+E:\7. Tools\Github\Online-Video-Player\api\bin\Debug\net8.0\api.runtimeconfig.json
+E:\7. Tools\Github\Online-Video-Player\api\bin\Debug\net8.0\api.dll
+E:\7. Tools\Github\Online-Video-Player\api\bin\Debug\net8.0\api.pdb
+E:\7. Tools\Github\Online-Video-Player\api\bin\Debug\net8.0\Microsoft.AspNetCore.OpenApi.dll
+E:\7. Tools\Github\Online-Video-Player\api\bin\Debug\net8.0\Microsoft.OpenApi.dll
+E:\7. Tools\Github\Online-Video-Player\api\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
+E:\7. Tools\Github\Online-Video-Player\api\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+E:\7. Tools\Github\Online-Video-Player\api\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+E:\7. Tools\Github\Online-Video-Player\api\obj\Debug\net8.0\api.csproj.AssemblyReference.cache
+E:\7. Tools\Github\Online-Video-Player\api\obj\Debug\net8.0\api.GeneratedMSBuildEditorConfig.editorconfig
+E:\7. Tools\Github\Online-Video-Player\api\obj\Debug\net8.0\api.AssemblyInfoInputs.cache
+E:\7. Tools\Github\Online-Video-Player\api\obj\Debug\net8.0\api.AssemblyInfo.cs
+E:\7. Tools\Github\Online-Video-Player\api\obj\Debug\net8.0\api.csproj.CoreCompileInputs.cache
+E:\7. Tools\Github\Online-Video-Player\api\obj\Debug\net8.0\api.MvcApplicationPartsAssemblyInfo.cs
+E:\7. Tools\Github\Online-Video-Player\api\obj\Debug\net8.0\api.MvcApplicationPartsAssemblyInfo.cache
+E:\7. Tools\Github\Online-Video-Player\api\obj\Debug\net8.0\api.sourcelink.json
+E:\7. Tools\Github\Online-Video-Player\api\obj\Debug\net8.0\scopedcss\bundle\api.styles.css
+E:\7. Tools\Github\Online-Video-Player\api\obj\Debug\net8.0\staticwebassets.build.json
+E:\7. Tools\Github\Online-Video-Player\api\obj\Debug\net8.0\staticwebassets.build.json.cache
+E:\7. Tools\Github\Online-Video-Player\api\obj\Debug\net8.0\staticwebassets.development.json
+E:\7. Tools\Github\Online-Video-Player\api\obj\Debug\net8.0\staticwebassets.build.endpoints.json
+E:\7. Tools\Github\Online-Video-Player\api\obj\Debug\net8.0\api.csproj.Up2Date
+E:\7. Tools\Github\Online-Video-Player\api\obj\Debug\net8.0\api.dll
+E:\7. Tools\Github\Online-Video-Player\api\obj\Debug\net8.0\refint\api.dll
+E:\7. Tools\Github\Online-Video-Player\api\obj\Debug\net8.0\api.pdb
+E:\7. Tools\Github\Online-Video-Player\api\obj\Debug\net8.0\api.genruntimeconfig.cache
+E:\7. Tools\Github\Online-Video-Player\api\obj\Debug\net8.0\ref\api.dll

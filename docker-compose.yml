@@ -1,0 +1,29 @@
+services:
+  nextjs:
+    build:
+      context: ./frontend
+    env_file:
+      - .env
+    ports:
+      - "${NEXTJS_PORT}:3000"
+    volumes:
+      - ./frontend:/app
+    working_dir: /app
+    command: "npm run dev"
+    depends_on:
+      - api
+    environment:
+      - CSHARP_API_URL=http://api:${API_PORT}
+
+  api:
+    build:
+      context: ./api
+    ports:
+      - "${API_PORT}:${API_PORT}"
+    env_file:
+      - .env
+    environment:
+      - ASPNETCORE_URLS=http://0.0.0.0:${API_PORT}
+      - MEDIA_STORAGE_PATH=${MEDIA_STORAGE_PATH}
+    volumes:
+      - "${MEDIA_STORAGE_MOUNT}:${MEDIA_STORAGE_PATH}"

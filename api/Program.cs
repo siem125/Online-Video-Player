@@ -4,16 +4,11 @@ using Microsoft.AspNetCore.Server.Kestrel.Core;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// 🌐 Select config file based on OS
-var platformConfig = RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
-    ? "mediaStorageSettings.windows.json"
-    : "mediaStorageSettings.linux.json";
-
-// ✅ Add your custom config file
-builder.Configuration.AddJsonFile(platformConfig, optional: false, reloadOnChange: true);
-
-// ✅ Bind config section to a POCO class
-builder.Services.Configure<MediaStorageSettings>(builder.Configuration.GetSection("MediaStorageSettings"));
+var mediaStoragePath = Environment.GetEnvironmentVariable("MEDIA_STORAGE_PATH");
+builder.Services.Configure<MediaStorageSettings>(options =>
+{
+    options.StoragePath = mediaStoragePath ?? "/videos"; // fallback
+});
 
 //setting a limit for uploading size
 builder.Services.Configure<KestrelServerOptions>(options =>
@@ -32,10 +27,10 @@ builder.Services.Configure<FormOptions>(options =>
 });
 
 //setting port
-builder.WebHost.ConfigureKestrel(serverOptions =>
-{
-    serverOptions.ListenAnyIP(5130); // listens on http://*:5005
-});
+// builder.WebHost.ConfigureKestrel(serverOptions =>
+// {
+//     serverOptions.ListenAnyIP(5130); // listens on http://*:5005
+// });
 
 // Voeg CORS services toe
 builder.Services.AddCors(options =>

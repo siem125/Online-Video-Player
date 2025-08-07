@@ -93,7 +93,7 @@ public class SeriesController : ControllerBase
                 if (parts.Length < 2)
                     continue;
 
-                Console.WriteLine("File had the structure of (season)/(episode).(ext)");
+                //Console.WriteLine("File had the structure of (season)/(episode).(ext)");
 
                 var seasonName = parts[0];
                 var fileName = parts[^1];
@@ -133,6 +133,8 @@ public class SeriesController : ControllerBase
 
                 string log = $"Saved {videoFileName} in {episodeToPath}";
                 logs.Add(log);
+
+                Console.WriteLine(log);
             }
 
             return Ok(new { logs = logs });
