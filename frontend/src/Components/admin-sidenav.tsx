@@ -1,13 +1,13 @@
 'use client'
 
-import AdminNavLinks from '@/app/Components/dashboard/admin-nav-links';
+import AdminNavLinks from '@/Components/dashboard/admin-nav-links';
 import { PowerIcon, PaintBrushIcon, UserIcon } from '@heroicons/react/24/outline';
 import { useRouter } from 'next/navigation';
 import React, { useState, useEffect } from 'react';
-import { useModal } from '@/app/Components/Modal/ModalContext';
+import { useModal } from '@/features/Providers/Modal/ModalContext';
 import { removeCookie, getCookie } from './utils/cookieUtils';
-import ThemeModal from './ThemeChanger/ThemeModal';
-import Icon from '@/app/Components/CustomIcons/Icon';
+import ThemeModal from '../features/Providers/ThemeChanger/ThemeModal';
+import Icon from '@/Components/CustomIcons/Icon';
 
 const logoutClickEvent = () => {
   removeCookie("projectID");

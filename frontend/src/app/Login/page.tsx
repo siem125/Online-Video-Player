@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { setCookie } from "@/app/Components/utils/cookieUtils"; // Utility function for setting cookies
-import { OwnApiConnection } from "@/app/Components/utils/OwnApiConnection";
+import { setCookie } from "@/Components/utils/cookieUtils"; // Utility function for setting cookies
+import { OwnApiConnection } from "@/Components/utils/OwnApiConnection";
 
 export default function Home() {
   const router = useRouter();

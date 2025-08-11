@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from 'next/navigation';
-import { useModal } from '@/app/Components/Modal/ModalContext'
+import { useModal } from '@/features/Providers/Modal/ModalContext'
 
 interface ELIProps {
   name: string;

@@ -1,6 +1,6 @@
 "use client";
 
-import { naturalSort } from "@/app/Components/utils/sort";
+import { naturalSort } from "@/Components/utils/sort";
 import path from "path";
 import React, { useState } from "react";
 

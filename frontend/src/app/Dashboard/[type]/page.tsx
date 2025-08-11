@@ -1,10 +1,10 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import SeriesCard from "@/app/Components/SeriesCard/SeriesCard";
+import SeriesCard from "@/Components/SeriesCard/SeriesCard";
 import "@/styles/cards.css";
-import { useModal } from "@/app/Components/Modal/ModalContext";
-import { SerieModalContent } from "@/app/Components/ModalExamples/SerieModalContent";
+import { useModal } from "@/features/Providers/Modal/ModalContext";
+import { SerieModalContent } from "@/Components/ModalExamples/SerieModalContent";
 
 export default function TypePage({ params }: { params: { type: string } }) {
   const [type, setType] = useState<string | null>(null);

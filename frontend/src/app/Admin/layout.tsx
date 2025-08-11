@@ -1,12 +1,12 @@
 'use client'
 
-import AdminSideNav from '@/app/Components/admin-sidenav';
+import AdminSideNav from '@/Components/admin-sidenav';
 import React from 'react';
-import { ModalProvider } from '../Components/Modal/ModalContext';
-import CustomModal from '../Components/Modal/Modals/CustomModal';
-import { AlertListProvider } from '../Components/Alert/AlertContext';
-import AlertsList from '../Components/Alert/AlertsList';
-import { ThemeProvider } from '../Components/ThemeChanger/ThemeContext'; // Import ThemeContext for theme management
+import { ModalProvider } from '../../features/Providers/Modal/ModalContext';
+import CustomModal from '../../features/Providers/Modal/Modals/CustomModal';
+import { AlertListProvider } from '../../features/Providers/Alert/AlertContext';
+import AlertsList from '../../features/Providers/Alert/AlertsList';
+import { ThemeProvider } from '../../features/Providers/ThemeChanger/ThemeContext'; // Import ThemeContext for theme management
 
 interface LayoutProps {
   children: React.ReactNode;

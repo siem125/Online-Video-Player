@@ -1,6 +1,6 @@
 // @/app/Components/ModalExamples/SerieModalContent.tsx
 import React, { useState, useEffect } from "react";
-import EpisodeListItem from "@/app/Components/EpisodeListItem/EpisodeListItem";
+import EpisodeListItem from "@/Components/EpisodeListItem/EpisodeListItem";
 
 interface SerieModalContentProps {
   selectedSeries: string;

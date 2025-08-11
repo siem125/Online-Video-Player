@@ -1,30 +1,38 @@
 'use client'
 
-import NavLinks from '@/app/Components/dashboard/nav-links';
+import NavLinks from '@/Components/dashboard/nav-links';
 import { PowerIcon, PaintBrushIcon, UserIcon } from '@heroicons/react/24/outline';
 import { useRouter } from 'next/navigation';
 import React, { useState, useEffect } from 'react';
-import { useModal } from '@/app/Components/Modal/ModalContext';
+import { useModal } from '@/features/Providers/Modal/ModalContext';
 import { removeCookie, getCookie } from './utils/cookieUtils';
-import ThemeModal from './ThemeChanger/ThemeModal';
-import Icon from '@/app/Components/CustomIcons/Icon';
+import ThemeModal from '../features/Providers/ThemeChanger/ThemeModal';
+import Icon from '@/Components/CustomIcons/Icon';
 
-const logoutClickEvent = () => {
-  removeCookie("projectID");
-  removeCookie("UserID");
-};
+import { useAuth } from '@/app/api/keycloak/KeycloakProvider';
 
 const SideNav: React.FC = () => {
   const { openModal } = useModal(); 
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const [hasAdminRights, setHasAdminRights] = useState(false);
   const router = useRouter();
+  
+  const { keycloak } = useAuth();
+   
+  const handleKeycloakLogout = () => {
+    //removeCookie("projectID");
+    //removeCookie("UserID");
+
+    keycloak.logout({
+      redirectUri: "http://localhost:3000"
+    });
+};
 
   // Fetch user data to check for alterationRights
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const cookieUsername = getCookie('authToken') || 'Guest';
+        const cookieUsername = getCookie('authToken');
         const response = await fetch(`/api/userData?username=${cookieUsername}`);
         if (!response.ok) throw new Error('Failed to fetch user data');
 
@@ -37,20 +45,6 @@ const SideNav: React.FC = () => {
 
     fetchUserData();
   }, []);
-
-  const handleOpenModal = () => {
-    openModal(() => (
-      <div>
-        <h2 style={{ color: 'green' }}>Logout Content</h2>
-        <p>This is the content of the modal for logging out.</p>
-        <a href="/api/auth/logout">
-          <button type='button' onClick={logoutClickEvent} className="bg-BTDanger hover:bg-BTDanger-dark px-4 py-2 rounded-md mt-4">
-            Sign-Out
-          </button>
-        </a>
-      </div>
-    ), {width: "50%", height: "50%", showCloseButton: true});
-  };
 
   const handleOpenThemeModal = () => {
     openModal(() => <ThemeModal />, {width: "50%", height: "50%", showCloseButton: true});
@@ -82,7 +76,7 @@ const SideNav: React.FC = () => {
             <span className="hidden md:block">Change Theme</span>
           </button>
 
-          <button onClick={handleOpenModal}>
+          <button onClick={handleKeycloakLogout}>
             <PowerIcon className="w-6" />
             <span className="hidden md:block">Sign Out</span>
           </button>

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import AdminSeasonComponent from "@/app/Components/AdminModal/AdminSeasonComponent";
+import AdminSeasonComponent from "@/Components/AdminModal/AdminSeasonComponent";
 
 interface Season {
   Number: number;

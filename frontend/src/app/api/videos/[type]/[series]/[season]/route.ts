@@ -1,7 +1,7 @@
 import { promises as fs } from "fs";
 import path from "path";
 import { NextResponse } from "next/server";
-import { naturalSort } from "@/app/Components/utils/sort";
+import { naturalSort } from "@/Components/utils/sort";
 
 // GET episodes for a given season using only the number
 export async function GET(req: Request, { params }: { params: { type: string, series: string, season: string } }) {

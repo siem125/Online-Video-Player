@@ -1,7 +1,7 @@
 "use client";
 
-import { ModalTypes, useModal } from "@/app/Components/Modal/ModalContext";
-import AdminSerieModal from "@/app/Components/ModalExamples/AdminSerieModal";
+import { ModalTypes, useModal } from "@/features/Providers/Modal/ModalContext";
+import AdminSerieModal from "@/Components/ModalExamples/AdminSerieModal";
 import { useState, useEffect } from "react";
 
 interface Show {

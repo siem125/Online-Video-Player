@@ -2,9 +2,9 @@
 
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
-import { getCookie } from '@/app/Components/utils/cookieUtils';
-import ToWatchList from '@/app/Components/CollectionList/ToWatchList';
-import CollectionsList from '@/app/Components/CollectionList/CollectionsList';
+import { getCookie } from '@/Components/utils/cookieUtils';
+import ToWatchList from '@/Components/CollectionList/ToWatchList';
+import CollectionsList from '@/Components/CollectionList/CollectionsList';
 
 export default function DashboardPage() {
     const [username, setUsername] = useState('');

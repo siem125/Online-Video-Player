@@ -3,7 +3,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { OwnApiConnection } from "../Components/utils/OwnApiConnection";
+import { OwnApiConnection } from "../../Components/utils/OwnApiConnection";
 
 export default function Register() {
   const [username, setUsername] = useState('');

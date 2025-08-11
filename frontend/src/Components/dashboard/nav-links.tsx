@@ -1,23 +1,24 @@
 'use client';
 
 import Link from 'next/link';
-import Icon from '@/app/Components/CustomIcons/Icon'
+import Icon from '@/Components/CustomIcons/Icon'
 import { usePathname } from 'next/navigation';
 import clsx from 'clsx';
 
 // Map of links to display in the side navigation.
 // Depending on the size of the application, this would be stored in a database.
 const links = [
-  { name: 'Home', href: '/Admin', icon: 'house' },
+  { name: 'Home', href: '/Dashboard', icon: 'house' },
   {
-    name: 'Shows',
-    href: '/Admin/Shows',
-    icon: 'television',
+    name: 'Movie',
+    href: '/Dashboard/movies',
+    icon: 'video_camera',
   },
-  { name: 'Users', href: '/Admin/Users', icon: 'television' },
+  { name: 'Serie', href: '/Dashboard/series', icon: 'television' },
+  { name: 'Anime', href: '/Dashboard/anime', icon: 'pokeball' },
 ];
 
-export default function AdminNavLinks() {
+export default function NavLinks() {
   const pathname = usePathname();
   return (
     <>

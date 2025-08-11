@@ -2,9 +2,9 @@
 
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
-import VideoPlayer from "@/app/Components/VideoPlayer";
-import { getCookie } from "@/app/Components/utils/cookieUtils";
-import EpisodeListItem from "@/app/Components/EpisodeListItem/EpisodeListItem";
+import VideoPlayer from "@/Components/VideoPlayer";
+import { getCookie } from "@/Components/utils/cookieUtils";
+import EpisodeListItem from "@/Components/EpisodeListItem/EpisodeListItem";
 
 type EpisodeDetails = {
   skippoints: { startTime: number; endTime: number }[];
