@@ -1,35 +1,27 @@
 import { NextResponse } from 'next/server';
-import fs from 'fs';
-import path from 'path';
 
 export async function GET(req: Request) {
     try {
         const { searchParams } = new URL(req.url);
-        const username = searchParams.get('username');
+        const userId = searchParams.get('userId');
 
-        if (!username) {
-            return new Response(JSON.stringify({ error: "Username is required" }), {
-              status: 400,
-            });
+        if (!userId) {
+            return NextResponse.json({ error: "UserID is required for UserData api" }, { status: 400 });
         }
 
-        // Load the user data from a JSON file (replace with your data source)
-        const usersDir = path.join(process.cwd(), "public/users");
-        const filePath = path.join(usersDir, `${username}.json`);
+        const backendUrl = process.env.CSHARP_API_URL;
+        const apiUrl = `${backendUrl}/api/VideoProject/UserData/getUser`;
 
-        if (!fs.existsSync(filePath)) {
-            return new Response(JSON.stringify({ error: "User not found" }), {
-              status: 404,
-            });
-        }
+        const res = await fetch(apiUrl, {
+            method: 'GET',
+            headers: { 'userId': userId }, // stuur userId als header
+        });
 
-        const jsonData = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+        const data = await res.json();
 
-        // Exclude the password from the response
-        const { password, ...userDataWithoutPassword } = jsonData;
-
-        return NextResponse.json(userDataWithoutPassword);
+        return NextResponse.json(data, { status: res.status });
     } catch (error) {
+        console.error("Error fetching from C# API:", error);
         return NextResponse.json({ error: 'Error fetching user data' }, { status: 500 });
     }
 }

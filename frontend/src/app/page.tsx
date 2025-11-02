@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { useAuth } from "../app/api/keycloak/KeycloakProvider";
+import { useAuth } from "../features/Providers/Keycloak/KeycloakProvider";
 
 export default function HomePage() {
     const { authenticated,  keycloak } = useAuth();

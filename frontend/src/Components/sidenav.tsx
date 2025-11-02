@@ -9,7 +9,7 @@ import { removeCookie, getCookie } from './utils/cookieUtils';
 import ThemeModal from '../features/Providers/ThemeChanger/ThemeModal';
 import Icon from '@/Components/CustomIcons/Icon';
 
-import { useAuth } from '@/app/api/keycloak/KeycloakProvider';
+import { useAuth } from '@/features/Providers/Keycloak/KeycloakProvider';
 
 const SideNav: React.FC = () => {
   const { openModal } = useModal(); 
@@ -17,7 +17,7 @@ const SideNav: React.FC = () => {
   const [hasAdminRights, setHasAdminRights] = useState(false);
   const router = useRouter();
   
-  const { keycloak } = useAuth();
+  const { keycloak, user } = useAuth();
    
   const handleKeycloakLogout = () => {
     //removeCookie("projectID");
@@ -32,12 +32,14 @@ const SideNav: React.FC = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const cookieUsername = getCookie('authToken');
-        const response = await fetch(`/api/userData?username=${cookieUsername}`);
+        // const cookieUsername = getCookie('authToken');
+        const response = await fetch(`/api/userData?userId=${user?.uniqueID}`);
         if (!response.ok) throw new Error('Failed to fetch user data');
 
         const userData = await response.json();
-        setHasAdminRights(userData?.alterationRights || false);
+
+        
+        setHasAdminRights(userData?.isAdmin || false);
       } catch (error) {
         console.error('Error fetching user data:', error);
       }

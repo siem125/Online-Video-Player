@@ -6,7 +6,7 @@ import { naturalSort } from "@/Components/utils/sort";
 // GET episodes for a given season using only the number
 export async function GET(req: Request, { params }: { params: { type: string, series: string, season: string } }) {
     try {
-        const { type, series, season } = params;
+        const { type, series, season } = await params;
 
         const apiBaseUrl = process.env.CSHARP_API_URL;
         const csharpApiUrl = `${apiBaseUrl}/api/VideoProject/season/${type}/${series}/${season}`;

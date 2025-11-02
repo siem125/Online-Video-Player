@@ -22,6 +22,15 @@ public class EpisodeController : ControllerBase
         TypeError
     }
 
+    private enum videoSkipCategories
+    {
+        Intro,
+        Outro,
+        Flashback,
+        Summary,
+        Blank
+    }
+
     private KeyValuePair<videoPathStatusCodes, string> getVideoPath(string type, string series, string season, string episode)
     {
         var basePath = Path.Combine(_settings.StoragePath, type, series);

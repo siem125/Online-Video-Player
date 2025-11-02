@@ -14,6 +14,7 @@ const keycloak = new Keycloak({
 export function KeycloakProvider({ children }: { children: React.ReactNode }) {
   const [authenticated, setAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [user, setUser] = useState<any>(null);
 
   useEffect(() => {
     keycloak
@@ -22,8 +23,24 @@ export function KeycloakProvider({ children }: { children: React.ReactNode }) {
         pkceMethod: "S256",
         checkLoginIframe: false
       })
-      .then(auth => {
+      .then(async (auth) => {
         setAuthenticated(auth);
+
+        if(auth) {
+          //Haal info uit token
+          const tokenData = keycloak.idTokenParsed || {};
+
+          setUser({
+            username:    tokenData.preferred_username,
+            firstName:    tokenData.given_name,
+            lastName:     tokenData.family_name,
+            email:        tokenData.email,
+            uniqueID:     tokenData.sub
+          })
+        }
+
+        //console.log("ID Token parsed: ", keycloak.tokenParsed);
+
         setLoading(false);
       })
       .catch(err => {
@@ -37,7 +54,7 @@ export function KeycloakProvider({ children }: { children: React.ReactNode }) {
   if (loading) return <p>Loading...</p>;
 
   return (
-    <AuthContext.Provider value={{ keycloak, authenticated }}>
+    <AuthContext.Provider value={{ keycloak, authenticated, user }}>
       {children}
     </AuthContext.Provider>
   );

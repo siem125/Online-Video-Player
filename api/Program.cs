@@ -7,7 +7,8 @@ var builder = WebApplication.CreateBuilder(args);
 var mediaStoragePath = Environment.GetEnvironmentVariable("MEDIA_STORAGE_PATH");
 builder.Services.Configure<MediaStorageSettings>(options =>
 {
-    options.StoragePath = mediaStoragePath ?? "/videos"; // fallback
+    options.StoragePath = mediaStoragePath + "/videos" ?? "/videos"; // fallback
+    options.UserStoragePath = mediaStoragePath + "/userData" ?? "/userData"; // fallback
 });
 
 //setting a limit for uploading size

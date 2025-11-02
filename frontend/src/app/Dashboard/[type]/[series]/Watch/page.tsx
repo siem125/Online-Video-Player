@@ -5,6 +5,8 @@ import { useParams } from "next/navigation";
 import VideoPlayer from "@/Components/VideoPlayer";
 import { getCookie } from "@/Components/utils/cookieUtils";
 import EpisodeListItem from "@/Components/EpisodeListItem/EpisodeListItem";
+import { useAuth } from "@/features/Providers/Keycloak/KeycloakProvider";
+import { Console } from "console";
 
 type EpisodeDetails = {
   skippoints: { startTime: number; endTime: number }[];
@@ -30,43 +32,70 @@ export default function EpisodePage() {
   const [currentSeason, setCurrentSeason] = useState<SplitDetails | null>(null);
   const [currentEpisode, setCurrentEpisode] = useState<SplitDetails | null>(null);
   const [currentTime, setCurrentTime] = useState(0);
-  const username = getCookie("authToken");
 
-  const fetchProfileData = async () => {
+  const { user } = useAuth();
+  const UserID = user?.uniqueID;
+
+  const fetchContinueData = async () => {
+    if (!UserID) return;
+
     try {
-      const response = await fetch(`/users/${username}.json`);
-      const profileData = await response.json();
-      const currentEpisode = profileData.toWatch?.find((ep: any) => ep.serie === series);
+      // Call je eigen Next.js API
+      const response = await fetch(`/api/userData/continue?userId=${UserID}`, {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+      });
+
+      if (!response.ok) throw new Error("Failed to fetch continue list");
+
+      const data = await response.json();
+      const continueList = data.ContinueList || [];
+
+      //console.log("Data: ", data);
+
+      // Zoek of dit seriesId er al in zit
+      const currentEpisode = continueList.find((ep: any) => ep.seriesID === series);
       if (currentEpisode) {
-        setCurrentSeason([currentEpisode.season, ""]);
-        setCurrentEpisode([currentEpisode.episode, ""]);
+        setCurrentSeason([currentEpisode.seasonNumber, ""]);
+        setCurrentEpisode([currentEpisode.episodeNumber, ""]);
         setCurrentTime(currentEpisode.time);
       }
     } catch (error) {
-      console.error("Error loading profile data:", error);
+      console.error("Error loading continue data:", error);
     }
   };
 
-  const updateProfileData = async () => {
+  const updateContinueData = async () => {
+    if (!UserID) return;
+
     const profileUpdate = {
-      serie: series,
-      season: currentSeason?.[0] || 1,
-      episode: currentEpisode?.[0] || 1,
-      time: currentTime
+      seriesID: series,
+      seasonNumber: currentSeason?.[0] || 0,
+      episodeNumber: currentEpisode?.[0] || 0,
+      time: currentTime,
     };
+
+    //console.log("api body: ", JSON.stringify(profileUpdate));
+
     try {
-      await fetch(`/api/updateProfile`, {
-        method: "POST",
-        body: JSON.stringify({ username, update: profileUpdate }),
-        headers: { "Content-Type": "application/json" }
+      const response = await fetch(`/api/userData/continue?userId=${UserID}`, {
+        method: "PATCH",
+        body: JSON.stringify(profileUpdate),
+        headers: { "Content-Type": "application/json" },
       });
+
+      if (!response.ok) throw new Error("Failed to update continue list");
     } catch (error) {
-      console.error("Error updating profile:", error);
+      console.error("Error updating continue list:", error);
     }
   };
+
+
 
   //Get the season and episode (if setted)
   useEffect(() => {
+    if(!series || !UserID) return; //Wait till both are available
+
     const manualSeason = sessionStorage.getItem("manualSeason");
     const manualEpisode = sessionStorage.getItem("manualEpisode");
 
@@ -75,14 +104,20 @@ export default function EpisodePage() {
       setCurrentEpisode([parseInt(manualEpisode), ""]);
       sessionStorage.removeItem("manualSeason");
       sessionStorage.removeItem("manualEpisode");
-    } else {
-      fetchProfileData();
-    }
-  }, []);
 
-  //updates the progress in the show for this user
+    } else {
+      fetchContinueData();
+    }
+  }, [series, UserID]);
+
+  //updates the progress in the show for this user, by throttle method
   useEffect(() => {
-    updateProfileData();
+    const interval = setInterval(() => {
+      updateContinueData();
+    },  30000) //elke 30 seconden
+
+
+    return ()  =>  clearInterval(interval);
   }, [currentSeason, currentEpisode, currentTime]);
 
   //get all the seasons for this series
@@ -127,9 +162,7 @@ export default function EpisodePage() {
     if (currentSeason && currentEpisode) {
       const fetchEpisodeDetails = async () => {
         try {
-          const response = await fetch(
-            `/api/videos/${type}/${series}/${currentSeason[0]}/${currentEpisode[0]}`
-          );
+          const response = await fetch(`/api/videos/${type}/${series}/${currentSeason[0]}/${currentEpisode[0]}` );
           const data: EpisodeDetails = await response.json();
           setDetails(data);
         } catch (error) {
@@ -159,7 +192,7 @@ export default function EpisodePage() {
       }
     }
 
-    updateProfileData();
+    updateContinueData();
   };
 
   if (!details) {

@@ -17,7 +17,7 @@ export default function UsersPage() {
 
         const fetchData = async () => {
             try {
-                const response = await fetch(`/api/userData?username=${cookieUsername}`);
+                const response = await fetch(`/api/userData?userId=${cookieUsername}`);
                 const data = await response.json();
                 if (response.ok) {
                     setToWatchList(data.toWatch);

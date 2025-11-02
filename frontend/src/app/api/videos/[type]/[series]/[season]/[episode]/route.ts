@@ -3,12 +3,12 @@ import path from "path";
 import { NextResponse } from "next/server";
 
 // Base path for public videos
-const PUBLIC_PATH = path.join(process.cwd(), "public/videos");
+//const PUBLIC_PATH = path.join(process.cwd(), "public/videos");
 
 // GET a specific episode using numeric values
 export async function GET(req: Request, { params }: { params: { type: string, series: string, season: string, episode: string } }) {
     try {
-    const { type, series, season, episode } = params;
+    const { type, series, season, episode } = await params;
 
     const apiBaseUrl = process.env.CSHARP_API_URL;
     const csharpApiUrl = `${apiBaseUrl}/api/VideoProject/episode/${type}/${series}/${season}/${episode}`;

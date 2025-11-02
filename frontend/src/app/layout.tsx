@@ -3,7 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 
 //For keycloak
-import { KeycloakProvider } from "../app/api/keycloak/KeycloakProvider";
+import { KeycloakProvider } from "../features/Providers/Keycloak/KeycloakProvider";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
