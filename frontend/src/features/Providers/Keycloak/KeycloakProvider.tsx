@@ -20,7 +20,7 @@ export function KeycloakProvider({ children }: { children: React.ReactNode }) {
     keycloak
       .init({
         onLoad: "check-sso",
-        pkceMethod: "S256",
+	pkceMethod: "S256",
         checkLoginIframe: false
       })
       .then(async (auth) => {

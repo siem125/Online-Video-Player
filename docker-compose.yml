@@ -6,14 +6,18 @@ services:
       - .env
       - ./frontend/.env.local
     ports:
-      - "127.0.0.1:${NEXTJS_PORT}:3000"
+      - "${NEXTJS_PORT}:3000" # no 127.0.0.1 prefix
     volumes:
       - ./frontend:/app
       - /app/node_modules
+
+      #for https with the "mkcert videoplayer.local" command 
+      - ./videoplayer.local.pem:/app/videoplayer.local.pem:ro
+      - ./videoplayer.local-key.pem:/app/videoplayer.local-key.pem:ro
     working_dir: /app
-    command: "npm run dev"
     depends_on:
       - api
+      - keycloak
     environment:
       - CSHARP_API_URL=http://api:${API_PORT}
       - CHOKIDAR_USEPOLLING=true
@@ -26,8 +30,46 @@ services:
       - "${API_PORT}:${API_PORT}"
     env_file:
       - .env
+    depends_on:
+      - keycloak
     environment:
       - ASPNETCORE_URLS=http://0.0.0.0:${API_PORT}
       - MEDIA_STORAGE_PATH=${MEDIA_STORAGE_PATH}
     volumes:
       - "${MEDIA_STORAGE_MOUNT}:${MEDIA_STORAGE_PATH}"
+
+
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: keycloak
+      POSTGRES_USER: keycloak
+      POSTGRES_PASSWORD: keycloak
+    volumes:
+      - keycloak_data:/var/lib/postgresql/data
+
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:24.0.4
+    command: start-dev --import-realm
+    container_name: keycloak
+    environment:
+      - KEYCLOAK_ADMIN=admin
+      - KEYCLOAK_ADMIN_PASSWORD=admin
+      - KC_DB=postgres
+      - KC_DB_URL_HOST=db
+      - KC_DB_URL_DATABASE=keycloak
+      - KC_DB_USERNAME=keycloak
+      - KC_DB_PASSWORD=keycloak
+     # - KC_HOSTNAME=localhost #in here can set the (ip) or localhost, but mine is dynamic atm so i will do it diffrent below
+      - KC_HOSTNAME_STRICT=false
+      - KC_HOSTNAME_STRICT_HTTPS=false
+    volumes:
+      - ./keycloak/realms:/opt/keycloak/data/import
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+
+volumes:
+ keycloak_data:

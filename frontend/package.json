@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "dev:https": "next dev --https --ssl-cert ./videoplayer.local.pem --ssl-key ./videoplayer.local-key.pem"
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
