@@ -6,7 +6,7 @@ services:
       - .env
       - ./frontend/.env.local
     ports:
-      - "${NEXTJS_PORT}:3000" # no 127.0.0.1 prefix
+      - "${NEXTJS_PORT}:${NEXTJS_PORT}" # no 127.0.0.1 prefix
     volumes:
       - ./frontend:/app
       - /app/node_modules
@@ -20,6 +20,7 @@ services:
       - keycloak
     environment:
       - CSHARP_API_URL=http://api:${API_PORT}
+      - NEXTJS_PORT=${NEXTJS_PORT}
       - CHOKIDAR_USEPOLLING=true
       - WATCHPACK_POLLING=true
 

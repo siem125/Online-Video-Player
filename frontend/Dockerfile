@@ -14,7 +14,7 @@ COPY . .
 # Fix permission issues
 RUN chmod +x node_modules/.bin/next
 
-# Zet poort (maar Compose bepaalt deze uiteindelijk)
+# Zet inner poort open
 EXPOSE 3000
 
 # Start de dev-server (hot-reload actief)

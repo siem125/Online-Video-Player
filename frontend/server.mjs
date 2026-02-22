@@ -4,6 +4,7 @@ import { parse } from "url";
 import next from "next";
 import fs from "fs";
 
+const port = process.env.NEXTJS_PORT || 3000;
 const dev = process.env.NODE_ENV !== "production";
 const app = next({ dev });
 const handle = app.getRequestHandler();
@@ -17,8 +18,8 @@ app.prepare().then(() => {
   createServer(httpsOptions, (req, res) => {
     const parsedUrl = parse(req.url, true);
     handle(req, res, parsedUrl);
-  }).listen(3000, "0.0.0.0", (err) => {
+  }).listen(port, "0.0.0.0", (err) => {
     if (err) throw err;
-    console.log("> Server running at https://videoplayer.local:3000");
+    console.log("> Server running at https://videoplayer.local:" + port);
   });
 });

@@ -773,18 +773,18 @@
       "clientId": "VideoPlayer-Next-Frontend",
       "name": "Next-Frontend",
       "description": "",
-      "rootUrl": "http://localhost:3000",
-      "adminUrl": "http://localhost:3000",
-      "baseUrl": "http://localhost:3000/",
+      "rootUrl": "https://localhost:5120",
+      "adminUrl": "https://localhost:5120",
+      "baseUrl": "https://localhost:5120/",
       "surrogateAuthRequired": false,
       "enabled": true,
       "alwaysDisplayInConsole": false,
       "clientAuthenticatorType": "client-secret",
       "redirectUris": [
-        "http://localhost:3000/*"
+        "https://localhosts:5120/*"
       ],
       "webOrigins": [
-        "http://localhost:3000"
+        "https://localhosts:5120"
       ],
       "notBefore": 0,
       "bearerOnly": false,
@@ -800,7 +800,7 @@
         "oidc.ciba.grant.enabled": "false",
         "backchannel.logout.session.required": "true",
         "login_theme": "keycloak",
-        "post.logout.redirect.uris": "http://localhost:3000/*",
+        "post.logout.redirect.uris": "https://localhost:5120/*",
         "display.on.consent.screen": "false",
         "oauth2.device.authorization.grant.enabled": "false",
         "backchannel.logout.revoke.offline.tokens": "false"
