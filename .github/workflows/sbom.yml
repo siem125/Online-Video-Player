@@ -1,0 +1,40 @@
+name: Generate SBOM
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  sbom:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Install Syft
+        run: |
+          curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | sh
+
+      # SBOM voor hele repo (detecteert Node + .NET)
+      - name: Generate SBOM (source)
+        run: |
+          ./bin/syft dir:. -o cyclonedx-json > sbom-source.json
+
+      # Bouw Docker images
+      - name: Build containers
+        run: docker compose build
+
+      # SBOM per container
+      - name: Generate SBOM (containers)
+        run: |
+          images=$(docker images --format "{{.Repository}}:{{.Tag}}" | grep -v "<none>")
+          for img in $images; do
+            ./bin/syft $img -o cyclonedx-json > sbom-$(echo $img | tr '/:' '_').json
+          done
+
+      - name: Upload SBOMs
+        uses: actions/upload-artifact@v4
+        with:
+          name: sbom
+          path: "*.json"
